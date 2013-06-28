@@ -7,15 +7,27 @@
 # All rights reserved - Do Not Redistribute
 #
 
-dirctory "~/.vim/bundle" do
-  mode 00744
-	action : create
+BUNDLE_HOME = node["neobundle"]["vim_home"] + "/bundle"
+USER = node["neobundle"]["user"]
+GROUP = node["neobundle"]["group"]
+
+directory BUNDLE_HOME do
+	owner USER
+	group GROUP
+	mode 00744
+	action :create
+	recursive true
 end
 
-git "~/.vim/bundle" do
-  repository "git://github.com/Shougo/neobundle.vim"
-  reference "master"
-  action :sync
+git BUNDLE_HOME do
+	user USER
+	group GROUP
+	repository "git://github.com/Shougo/neobundle.vim"
+	reference "master"
+	action :sync
 end
 
-
+bash "chown" do
+	cwd BUNDLE_HOME
+	code "chown -R " <<  USER << ":" << GROUP << " " << BUNDLE_HOME << "&&" << "chmod -R 744 " << BUNDLE_HOME
+end
