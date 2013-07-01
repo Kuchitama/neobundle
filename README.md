@@ -1,24 +1,17 @@
 neobundle Cookbook
 ==================
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwhich.
+This cookbook install vim and neobundle in your machene.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - neobundle needs toaster to brown your bagel.
+#### cookbooks
+- `vim` - neobundle needs to install.
 
 Attributes
 ----------
-TODO: List you cookbook attributes here.
 
-e.g.
-#### neobundle::default
+#### neobundle::default require arguments
 <table>
   <tr>
     <th>Key</th>
@@ -27,17 +20,28 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['neobundle']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['neobundle']['vim_home']</tt></td>
+    <td>String</td>
+    <td>the path of vim home</td>
+    <td><tt>undefined</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['neobundle']['user']</tt></td>
+    <td>String</td>
+    <td>the user of vim</td>
+    <td><tt>undefined</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['neobundle']['group']</tt></td>
+    <td>String</td>
+    <td>the group of vim</td>
+    <td><tt>undefined</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### neobundle::default
-TODO: Write usage instructions for each cookbook.
 
 e.g.
 Just include `neobundle` in your node's `run_list`:
@@ -47,15 +51,17 @@ Just include `neobundle` in your node's `run_list`:
   "name":"my_node",
   "run_list": [
     "recipe[neobundle]"
-  ]
+  ],
+  "neobundle" : {
+    "vim_home" : "/home/<your user name>",
+    "user" : "<your user name>",
+    "group" : "<your group name>"
+  }
 }
 ```
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write you change
