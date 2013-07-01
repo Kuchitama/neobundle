@@ -5,7 +5,8 @@ This cookbook install vim and neobundle in your machene.
 Requirements
 ------------
 
-#### cookbooks
+#### vim (Option)
+If you have not installed vim in your machine, you can run vim cookbook to install it.
 - `vim` - neobundle needs to install.
 
 Attributes
