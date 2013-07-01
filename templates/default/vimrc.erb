@@ -1,0 +1,145 @@
+set shell=/bin/bash\ -i
+
+set ignorecase
+set smartcase
+
+" タブの画面上での幅
+set tabstop=4
+" タブをスペースに展開しない (expandtab:展開する)
+set noexpandtab
+" 自動的にインデントする (noautoindent:インデントしない)
+set autoindent
+" バックスペースでインデントや改行を削除できるようにする
+set backspace=2
+" 検索時にファイルの最後まで行ったら最初に戻る (nowrapscan:戻らない)
+set wrapscan
+" 括弧入力時に対応する括弧を表示 (noshowmatch:表示しない)
+set showmatch
+" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
+set wildmenu
+" テキスト挿入中の自動折り返しを日本語に対応させる
+set formatoptions+=mM
+
+" 行番号を非表示 
+set number
+" ルーラーを表示
+set ruler
+" タブや改行を表示 (list:表示)
+set nolist
+" 長い行を折り返して表示 
+set wrap
+" 常にステータス行を表示
+set laststatus=2
+" コマンドラインの高さ 
+set cmdheight=2
+" コマンドをステータス行に表示
+set showcmd
+" タイトルを表示
+set title
+
+" autofmt: 日本語文章のフォーマット(折り返し)プラグイン.
+set formatexpr=autofmt#japanese#formatexpr()
+
+set clipboard=unnamed
+set backup
+set writebackup
+"set backupdir=~/Documents/VimBackup
+"let &directory = &backupdir
+set softtabstop=4
+set shiftwidth=4
+set smartindent
+set smarttab
+set whichwrap=b,s,h,l,<,>,[,]
+
+syntax on
+"filetype on
+filetype indent off
+filetype plugin off
+
+set enc=utf-8
+set fenc=utf-8
+set fencs=utf-8,euc-jp,cp932,iso-2022-jp
+
+"--------------------------------------------------------------------------
+" neobundle
+set nocompatible               " Be iMproved
+filetype off                   " Required!
+filetype plugin indent off 
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Installation check.
+if neobundle#exists_not_installed_bundles()
+  echomsg 'Not installed bundles : ' .
+        \ string(neobundle#get_not_installed_bundle_names())
+  echomsg 'Please execute ":NeoBundleInstall" command.'
+  "finish
+endif
+
+filetype plugin indent on     " Required!
+filetype indent off
+filetype plugin off
+
+NeoBundle 'Shougo/neocomplcache.git'
+NeoBundle 'Shougo/neosnippet.git'
+NeoBundle 'plasticboy/vim-markdown.git'
+NeoBundle 'ujihisa/quickrun.git'
+NeoBundle 'vim-scripts/VimClojure.git'
+NeoBundle 'basyura/TweetVim.git'
+NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'scrooloose/syntastic.git'
+NeoBundle 'tpope/vim-fugitive.git'
+NeoBundle 'tomasr/molokai'
+
+"--------------------------------------------------------------------------
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+" Enable omni completion. Not required if they are already set elsewhere in .vimrc
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+let g:neocomplcache_dictionary_filetype_lists = {
+  \ 'default' : '',
+  \ 'hentai' : $HOME.'/.vim/dict/hentai.dict',
+  \ 'scala' : $HOME . '/.vim/dict/scala.dict',
+  \ }
+
+"--------------------------------------------------------------------------
+" neosnippet
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
+
+"---------------------------------------------------------------------------
+" grep
+set grepprg=grep\ -nH
+
+"---------------------------------------------------------------------------
+" vim-fugitive
+set statusline+=%{fugitive#statusline()}
+
+
+"---------------------------------------------------------------------------
+" molokai
+let g:molokai_original = 1
+set background=dark
