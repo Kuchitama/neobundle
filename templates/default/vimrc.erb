@@ -43,8 +43,6 @@ set formatexpr=autofmt#japanese#formatexpr()
 set clipboard=unnamed
 set backup
 set writebackup
-"set backupdir=~/Documents/VimBackup
-"let &directory = &backupdir
 set softtabstop=4
 set shiftwidth=4
 set smartindent
@@ -84,62 +82,3 @@ filetype plugin indent on     " Required!
 filetype indent off
 filetype plugin off
 
-NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'Shougo/neosnippet.git'
-NeoBundle 'plasticboy/vim-markdown.git'
-NeoBundle 'ujihisa/quickrun.git'
-NeoBundle 'vim-scripts/VimClojure.git'
-NeoBundle 'basyura/TweetVim.git'
-NeoBundle 'Shougo/unite.vim.git'
-NeoBundle 'scrooloose/nerdtree.git'
-NeoBundle 'scrooloose/syntastic.git'
-NeoBundle 'tpope/vim-fugitive.git'
-NeoBundle 'tomasr/molokai'
-
-"--------------------------------------------------------------------------
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-
-" Enable omni completion. Not required if they are already set elsewhere in .vimrc
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
-let g:neocomplcache_dictionary_filetype_lists = {
-  \ 'default' : '',
-  \ 'hentai' : $HOME.'/.vim/dict/hentai.dict',
-  \ 'scala' : $HOME . '/.vim/dict/scala.dict',
-  \ }
-
-"--------------------------------------------------------------------------
-" neosnippet
-
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/snipmate-snippets/snippets'
-
-"---------------------------------------------------------------------------
-" grep
-set grepprg=grep\ -nH
-
-"---------------------------------------------------------------------------
-" vim-fugitive
-set statusline+=%{fugitive#statusline()}
-
-
-"---------------------------------------------------------------------------
-" molokai
-let g:molokai_original = 1
-set background=dark
